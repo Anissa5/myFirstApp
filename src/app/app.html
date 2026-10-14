@@ -1,15 +1,3 @@
-<app-user-profile></app-user-profile>
+<app-menu></app-menu>
 
-<h2>Ma liste de courses pour la raclette</h2>
-
-<button (click)="ajouterJambon()">Ajouter du jambon</button>
-
-  <ul *ngIf="showList">
-
-    <li *ngFor="let ingredient of ingredients"
-     [ngClass]="{ 'vital': ingredient === 'Cornichons' }">
-  {{ ingredient }}
-</li>
-  </ul>
-
-<router-outlet />
+<router-outlet></router-outlet>
