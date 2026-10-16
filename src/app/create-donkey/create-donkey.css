@@ -1,0 +1,146 @@
+:host {
+  display: block;
+  color: #26362b;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+h2 {
+  margin: 0 0 24px;
+  color: #234b38;
+  font-size: 1.65rem;
+  letter-spacing: -0.04em;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+label {
+  color: #405443;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid #dce3d7;
+  border-radius: 12px;
+  background: #fff;
+  color: #26362b;
+  font: inherit;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+input:hover {
+  border-color: #a6b99a;
+}
+
+input:focus {
+  border-color: #467451;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgb(70 116 81 / 12%);
+}
+
+input:focus:invalid {
+  border-color: #c77860;
+}
+
+button[type="submit"] {
+  width: 100%;
+  margin-top: 6px;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+  box-shadow: 0 5px 12px rgb(35 75 56 / 12%);
+  transition:
+    transform 180ms ease,
+    filter 180ms ease,
+    box-shadow 180ms ease;
+}
+
+button[type="submit"]:hover {
+  filter: brightness(0.94);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgb(35 75 56 / 16%);
+}
+
+button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+button:focus-visible {
+  outline: 3px solid #a8c598;
+  outline-offset: 3px;
+}
+
+h3 {
+  margin: 26px 0 12px;
+  color: #315f43;
+  font-size: 1.1rem;
+}
+
+p {
+  color: #667367;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  width: 150px;
+  height: 120px;
+  margin-top: 12px;
+  border: 1px solid #e4e9df;
+  border-radius: 14px;
+  object-fit: cover;
+  background: #f4f5ed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #b8cdb7;
+  border-radius: 12px;
+  background-color: #f5f8f2;
+  color: #465846;
+  box-sizing: border-box;
+}
+
+input[type="file"]::file-selector-button {
+  padding: 10px 16px;
+  margin-right: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #198754;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #146c43;
+}

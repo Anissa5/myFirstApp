@@ -1,0 +1,119 @@
+
+<div class="page-shell">
+
+  <header class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">DONKEY STORY · ADOPTION</p>
+      <h1>Chaque âne mérite<br>sa belle histoire.</h1>
+      <p class="hero-description">
+        Découvre tes futurs compagnons, prends soin d’eux
+        et construis une belle histoire ensemble.
+      </p>
+
+      <div class="hero-tags">
+        <span>🌿 Bien-être animal</span>
+        <span>🤎 Adoption responsable</span>
+      </div>
+    </div>
+
+    <div class="hero-art" aria-hidden="true">
+      <span class="donkey-emoji">🫏</span>
+      <span class="art-sparkle sparkle-one">✦</span>
+      <span class="art-sparkle sparkle-two">✧</span>
+    </div>
+  </header>
+
+  <section class="top-grid">
+
+    <div class="panel form-panel">
+      <app-create-donkey
+        (donkeyCreated)="addDonkey($event)"
+      ></app-create-donkey>
+    </div>
+
+    <div class="panel adopted-panel">
+      <app-user-donkey
+        [donkeys]="userDonkeys"
+        (adoptionCancelled)="cancelAdoption($event)">
+        </app-user-donkey>
+    </div>
+
+  </section>
+
+  <section class="available-section">
+
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow dark-eyebrow">LA COLLECTION</p>
+        <h2>
+          @if (filterStatus === 'all') {
+            Tous nos ânes
+          } @else if (filterStatus === 'available') {
+            Nos ânes disponibles
+          } @else {
+            Nos ânes adoptés
+          }
+        </h2>
+        <p class="section-description">
+          Un nouveau compagnon attend peut-être de te rencontrer.
+        </p>
+      </div>
+
+      <div class="count-card">
+        <span class="count-icon">🫏</span>
+        <strong>{{ availableDonkeysCount }}</strong>
+        <span>disponible(s)</span>
+      </div>
+    </div>
+
+    <nav class="filter-toolbar" aria-label="Filtrer les ânes">
+      <button
+        type="button"
+        [class.active]="filterStatus === 'all'"
+        (click)="filterStatus = 'all'"
+      >
+        Tous les ânes
+      </button>
+
+      <button
+        type="button"
+        [class.active]="filterStatus === 'available'"
+        (click)="filterStatus = 'available'"
+      >
+        🌿 Disponibles
+      </button>
+
+      <button
+        type="button"
+        [class.active]="filterStatus === 'adopted'"
+        (click)="filterStatus = 'adopted'"
+      >
+        🤎 Déjà adoptés
+      </button>
+    </nav>
+
+    <div class="donkey-results">
+      @if (filteredDonkeys.length > 0) {
+        <app-list-donkey
+          [donkeys]="filteredDonkeys"
+          (donkeyRemoved)="removeDonkey($event)"
+          (donkeyAdopted)="adoptDonkey($event)"
+        ></app-list-donkey>
+      } @else {
+        <div class="empty-state">
+          <span class="empty-icon">🌱</span>
+          <h3>Aucun âne dans cette catégorie</h3>
+          <p>
+            Essaie un autre filtre ou ajoute un nouveau compagnon.
+          </p>
+        </div>
+      }
+    </div>
+
+  </section>
+
+  <footer class="page-footer">
+    Fait avec 🤎 pour nos amis aux grandes oreilles.
+  </footer>
+
+</div>

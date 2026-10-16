@@ -1,0 +1,77 @@
+
+<h2>Ajouter un âne</h2>
+
+<form #donkeyForm="ngForm"
+      (ngSubmit)="createDonkey()"
+      (input)="errorMessage = ''; createdDonkey = null">
+  <div>
+    <label for="name">Nom :</label>
+    <input
+      id="name"
+      type="text"
+      name="name"
+      [(ngModel)]="name"
+      required
+    >
+  </div>
+
+  <div>
+    <label for="origin">Origine :</label>
+    <input
+      id="origin"
+      type="text"
+      name="origin"
+      [(ngModel)]="origin"
+      required
+    >
+  </div>
+
+  <div>
+    <label for="birthDate">Date de naissance :</label>
+    <input
+      id="birthDate"
+      type="date"
+      name="birthDate"
+      [(ngModel)]="birthDate"
+      required
+    >
+  </div>
+
+  <div>
+    <label for="photo">Photo :</label>
+    <input
+    id="photo"
+    type="file"
+    accept="image/*"
+    (change)="onPhotoSelected($event)"
+    >
+  </div>
+
+@if (errorMessage) {
+  <p>{{ errorMessage }}</p>
+}
+
+  <button
+  type="submit"
+  [style.background-color]="donkeyForm.valid ? '#198754' : '#adb5bd'"
+  [style.color]="'white'"
+>
+  Créer l'âne
+</button>
+</form>
+
+<h3>Aperçu du nouvel âne</h3>
+
+<p>Nom : {{ name }}</p>
+<p>Origine : {{ origin }}</p>
+<p>Date de naissance : {{ birthDate }}</p>
+
+@if (photo) {
+  <img [src]="photo" alt="Photo du nouvel âne" width="150">
+}
+
+@if (createdDonkey) {
+  <h3>Âne créé avec succès !</h3>
+  <p>Nom : {{ createdDonkey.name }}</p>
+  <p>Origine : {{ createdDonkey.origin }}</p>
+}

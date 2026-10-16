@@ -1,0 +1,116 @@
+<section class="adopted-section">
+  <header class="adopted-heading">
+    <div class="heading-icon">🤎</div>
+
+    <div class="heading-text">
+      <h2>Mes ânes adoptés</h2>
+      <p>Une belle histoire commence ici.</p>
+    </div>
+
+    <span class="adopted-count">{{ donkeys.length }}</span>
+  </header>
+
+  @if (donkeys.length > 0) {
+    <div class="adopted-list">
+      @for (donkey of donkeys; track donkey.name) {
+
+        <article class="adopted-card">
+  @if (editingDonkey === donkey && editedDonkey) {
+    <form class="adopted-edit-form" (ngSubmit)="saveEdit()">
+      <h3>Modifier {{ donkey.name }}</h3>
+
+      <label>
+        Nom
+        <input
+          type="text"
+          name="adoptedName"
+          [(ngModel)]="editedDonkey.name"
+          required
+        >
+      </label>
+
+      <label>
+        Origine
+        <input
+          type="text"
+          name="adoptedOrigin"
+          [(ngModel)]="editedDonkey.origin"
+          required
+        >
+      </label>
+
+      <label>
+        Date de naissance
+        <input
+          type="date"
+          name="adoptedBirthDate"
+          [(ngModel)]="editedDonkey.birthDate"
+          required
+        >
+      </label>
+
+      <label>
+        Photo (URL)
+        <input
+          type="text"
+          name="adoptedPhoto"
+          [(ngModel)]="editedDonkey.photo"
+        >
+      </label>
+
+      <div class="adopted-edit-actions">
+        <button type="submit" class="adopted-save-button">
+          Enregistrer
+        </button>
+
+        <button
+          type="button"
+          class="adopted-cancel-button"
+          (click)="cancelEdit()"
+        >
+          Annuler
+        </button>
+      </div>
+    </form>
+  } @else {
+    <img
+      [src]="donkey.photo"
+      [alt]="'Photo de ' + donkey.name"
+    >
+
+    <div class="adopted-info">
+      <h3>{{ donkey.name }}</h3>
+      <p>🌍 {{ donkey.origin }}</p>
+      <p>🎂 {{ donkey.birthDate }}</p>
+    </div>
+
+    <span class="adopted-badge">Adopté ✓</span>
+
+    <button type="button"
+            class="cancel-adoption-button"
+            (click)="cancelAdoption(donkey)">
+            ↩️ Annuler l’adoption
+    </button>
+
+    <button
+      type="button"
+      class="adopted-edit-button"
+      (click)="startEdit(donkey)"
+    >
+      ✏️ Modifier
+    </button>
+  }
+</article>
+      }
+    </div>
+  } @else {
+    <div class="empty-adopted">
+      <span class="empty-icon">🌱</span>
+      <h3>Ton histoire commence bientôt</h3>
+      <p>Tu n'as pas encore adopté d'âne.</p>
+      <span class="empty-note">
+        Ton prochain compagnon t'attend peut-être.
+      </span>
+    </div>
+  }
+</section>
