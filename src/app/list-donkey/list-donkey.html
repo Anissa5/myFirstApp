@@ -1,0 +1,127 @@
+@for (donkey of donkeys; track donkey.name) {
+  <article
+    class="donkey-card"
+    (mouseenter)="hoveredDonkey = donkey"
+    (mouseleave)="hoveredDonkey = null"
+  >
+    <div class="donkey-photo">
+      <img
+        [src]="donkey.photo"
+        [alt]="'Photo de ' + donkey.name"
+      >
+      <span class="photo-label">
+        @if (donkey.isAdopted) {
+          🤎 Déjà adopté
+        } @else {
+          🌿 Compagnon à rencontrer
+        }
+      </span>
+    </div>
+
+    <div class="donkey-content">
+
+      @if (editingDonkey === donkey && editedDonkey) {
+  <h3>Modifier {{ donkey.name }}</h3>
+
+  <form class="edit-form" (ngSubmit)="saveEdit()">
+    <label>
+      Nom
+      <input
+        type="text"
+        name="editName"
+        [(ngModel)]="editedDonkey.name"
+        required
+      >
+    </label>
+
+    <label>
+      Origine
+      <input
+        type="text"
+        name="editOrigin"
+        [(ngModel)]="editedDonkey.origin"
+        required
+      >
+    </label>
+
+    <label>
+      Date de naissance
+      <input
+        type="date"
+        name="editBirthDate"
+        [(ngModel)]="editedDonkey.birthDate"
+        required
+      >
+    </label>
+
+    <label>
+      Photo (URL)
+      <input
+        type="text"
+        name="editPhoto"
+        [(ngModel)]="editedDonkey.photo"
+      >
+    </label>
+
+    <div class="edit-actions">
+      <button type="submit" class="save-button">
+        Enregistrer
+      </button>
+
+      <button
+        type="button"
+        class="cancel-button"
+        (click)="cancelEdit()"
+      >
+        Annuler
+      </button>
+    </div>
+  </form>
+} @else {
+  <h3>{{ donkey.name }}</h3>
+
+  @if (hoveredDonkey === donkey) {
+    <div class="donkey-details">
+      <p>
+        <span>Origine</span>
+        <strong>{{ donkey.origin }}</strong>
+      </p>
+      <p>
+        <span>Naissance</span>
+        <strong>{{ donkey.birthDate }}</strong>
+      </p>
+    </div>
+  } @else {
+    <p class="hover-hint">Survole la carte pour en savoir plus ✨</p>
+  }
+
+  <div class="donkey-actions">
+    <button
+      type="button"
+      class="adopt-button"
+      (click)="donkeyAdopted.emit(donkey)"
+    >
+      Adopter {{ donkey.name }}
+    </button>
+
+    <button
+      type="button"
+      class="edit-button"
+      (click)="startEdit(donkey)"
+    >
+      ✏️ Modifier la fiche
+    </button>
+
+    <button
+      type="button"
+      class="remove-button"
+      (click)="confirmRemoval(donkey)"
+    >
+      Supprimer
+    </button>
+  </div>
+}
+
+    </div>
+  </article>
+}
